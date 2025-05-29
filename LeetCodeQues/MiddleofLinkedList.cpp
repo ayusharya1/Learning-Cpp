@@ -35,16 +35,45 @@ int length(Node *head){
     }
     return count;
 }
+//brute force approach
+// void Middle(Node*head){
+//     Node* temp=head;
+//     int i=1;
+//     int mid=length(head)/2 + 1;
+//     while (i<mid && temp!=NULL)
+//     {
+//         temp=temp->next;
+//         i++;
+//     }
+//     cout<<"Middle is  "<<temp->data<<endl;
+// }
+
+//optimal approach
 void Middle(Node*head){
-    Node* temp=head;
-    int i=1;
-    int mid=length(head)/2 + 1;
-    while (i<mid && temp!=NULL)
-    {
-        temp=temp->next;
-        i++;
+    //edge cases
+    if(head==NULL){//empty
+        return;
     }
-    cout<<"Middle is  "<<temp->data<<endl;
+    if (head->next==NULL){//1 node
+        cout<<head->data<<endl;
+        return;
+    }
+    if(head->next->next==NULL){
+        cout<<head->next->data<<endl;
+        return;
+    }
+    Node *slow=head;
+    Node *fast=head->next;
+    while (fast!=NULL)
+    {
+        fast=fast->next;
+        if(fast!=NULL){
+            fast=fast->next;//dusra bhi age bhadado agar null nhi h
+        }
+        slow=slow->next;
+    }
+    cout<<"Middle is  "<<slow->data<<endl;
+
 }
 int main(){
     Node *head=NULL;
