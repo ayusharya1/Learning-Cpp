@@ -11,6 +11,9 @@ class Node{
         this->next=NULL;
         this->prev=NULL;
     }
+       ~Node() {
+        cout << "Node deleted with data " << data << endl;
+    }
 };
 void InsertAtHead(Node* &head,int data){
     Node *temp=new Node(data);
@@ -56,6 +59,24 @@ void InsertAtPoint(Node* &head,Node* &tail,int data,int position){
         
     }
 }
+void RemoveDuplicates(Node* &head){
+    if(head==NULL){
+        return;
+    }
+    Node*curr=head;
+    while (curr != NULL && curr->next != NULL) {
+        if (curr->data == curr->next->data) {
+            Node* temp = curr->next;
+            curr->next = temp->next;
+            if (temp->next != NULL) {
+                temp->next->prev = curr;
+            }
+            delete temp;
+        } else {
+            curr = curr->next;
+        }
+    }
+}
 int main(){
     Node *node1=new Node(10);
     Node *head=node1;
@@ -63,9 +84,15 @@ int main(){
     InsertAtHead(head,5);
     InsertAtHead(head,3);
     InsertAtTail(tail,55);
+    InsertAtTail(tail,55);
+    InsertAtTail(tail,55);
     InsertAtTail(tail,65);
-    InsertAtPoint(head,tail,8,3);
-    InsertAtPoint(head,tail,100,7);
+    InsertAtTail(tail,65);
+    InsertAtTail(tail,65);
+    // InsertAtPoint(head,tail,8,3);
+    // InsertAtPoint(head,tail,100,7);
+    print(head);
+    RemoveDuplicates(head);
     print(head);
     return 0;
 }

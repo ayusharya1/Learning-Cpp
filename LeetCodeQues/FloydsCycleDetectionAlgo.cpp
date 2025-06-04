@@ -78,8 +78,7 @@ void RemoveLop(Node *head){
     temp->next = NULL;
     return;
 }
-int main()
-{
+int main(){
     Node *head = NULL;
     Node *tail = NULL;
     Node *n1 = new Node(10);
